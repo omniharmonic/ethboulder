@@ -1,27 +1,21 @@
 # OmniHarmonic - ETHBoulder Experience
 
-An immersive 3D web experience created specifically for ETHBoulder 2024, embodying "digital ecological harmony" through interactive visualizations that showcase the intersection of blockchain technology and consciousness.
+An immersive 3D web experience created specifically for ETHBoulder 2024, featuring Boulder's iconic Flatirons terrain and Ethereum-inspired visual design.
 
-## 🏔️ ETHBoulder Special Features
+## 🏔️ Features
 
-- **ETHBoulder Track Visualization**: Interactive 3D network showcasing the 5 main conference tracks
-  - **AI Track**: AI-powered smart contracts and machine learning applications
-  - **ETH Localism Track**: Building local Ethereum communities and ecosystems  
-  - **App Track**: Application development and Web3 UX/UI design
-  - **Abundance Track**: Regenerative finance and prosperity technology
-  - **Protocol Layer Track**: Core Ethereum protocol development and infrastructure
-- **Interactive Topographical Landscape**: 2D to 3D transformation representing the Boulder landscape
-- **Cellular Growth Simulation**: Organic particle system showing the evolution of blockchain communities
-- **Spatial Audio Design**: Context-aware soundscapes for each conference track
-- **Sacred Geometry**: Golden ratio proportions reflecting the harmony of blockchain ecosystems
+- **Interactive Boulder Terrain**: 3D rendering of Boulder's Flatirons climbing area with mouse-responsive interactions
+- **3D Ethereum Logo**: Floating Ethereum symbol with dynamic lighting and rotation
+- **Clean Glass Card UX**: Modern frosted glass interface with smooth animations
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Performance Optimized**: Smooth 60fps experience across all devices
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Vanilla JavaScript + Three.js for immersive 3D graphics
+- **Frontend**: Vanilla JavaScript + Three.js for 3D graphics
 - **Build**: Vite with ES2020 target and legacy browser support
 - **Animation**: GSAP with ScrollTrigger for scroll-based interactions
-- **Audio**: Tone.js for interactive sound synthesis
-- **Styling**: CSS3 with Custom Properties and sacred geometry proportions
+- **Styling**: CSS3 with Custom Properties and modern glass morphism effects
 - **Deployment**: Vercel with optimized caching and security headers
 
 ## 🚀 Quick Start
@@ -52,24 +46,17 @@ npm run deploy:vercel
 npm run deploy:preview
 ```
 
-## 🎮 ETHBoulder Interaction Guide
+## 🎮 Interaction Guide
 
-### Homepage - Boulder Landscape
-- **Mouse Movement**: Creates sound waves and terrain interaction
-- **Scrolling**: Transforms 2D contour map into 3D terrain representing Boulder's mountains
-- **Audio**: Ambient soundscape with mouse sonification
+### Homepage - Boulder Terrain
+- **Mouse Movement**: Creates interactive effects across the 3D terrain
+- **Scrolling**: Smooth parallax effects and animations
+- **3D Ethereum Logo**: Continuously rotating with dynamic lighting
 
-### Systems Section - Conference Tracks Network
-- **Track Hover**: Highlights connected tracks with visual and audio feedback
-- **Track Click**: Displays detailed information about each ETHBoulder track
-- **Navigation**: Use arrow keys for accessibility
-
-### Culture Section - Community Evolution
-- **Mouse Movement**: Influences cell movement and division patterns representing community growth
-- **Click**: Adds environmental stimuli to accelerate growth
-- **Controls**: 
-  - `P` or Pause button: Pause/resume simulation
-  - `R` or Reset button: Reset to single mother cell
+### Glass Card Interface
+- **Hover Effects**: Subtle animations on interactive elements
+- **Smooth Transitions**: Modern glass morphism design language
+- **Responsive Layout**: Adapts seamlessly to different screen sizes
 
 ## ♿ Accessibility Features
 
@@ -77,29 +64,6 @@ npm run deploy:preview
 - **Screen Reader Support**: Comprehensive ARIA labels and live regions
 - **Reduced Motion**: Respects `prefers-reduced-motion` setting
 - **High Contrast**: Adapts to `prefers-contrast` preferences
-- **Alternative Navigation**: Text-based menu (Ctrl+/ to toggle)
-- **Help System**: Keyboard shortcuts guide (Ctrl+H)
-
-## 🎵 Audio System
-
-The application features a sophisticated audio system that:
-
-- Generates ambient soundscapes specific to each ETHBoulder track
-- Sonifies user interactions (mouse movement, scrolling, clicks)
-- Respects browser autoplay policies with user-initiated activation
-- Provides audio feedback for accessibility
-
-Audio can be controlled through the user's system volume and will automatically initialize on first user interaction.
-
-## 🔧 Performance Optimization
-
-The application automatically adapts to device capabilities:
-
-- **Low Performance**: Reduced particle counts, simplified geometry, disabled shadows
-- **Medium Performance**: Balanced quality and performance
-- **High Performance**: Full visual fidelity with advanced effects
-
-Performance monitoring runs continuously and adjusts quality in real-time to maintain smooth frame rates.
 
 ## 🌐 Browser Support
 
@@ -115,13 +79,13 @@ Performance monitoring runs continuously and adjusts quality in real-time to mai
 
 ## 🎨 Design Philosophy
 
-OmniHarmonic for ETHBoulder embodies digital ecological harmony through:
+OmniHarmonic for ETHBoulder embodies modern web design through:
 
-- **Sacred Geometry**: Golden ratio proportions in layout and animations
-- **Organic Interactions**: Natural, breathing animations and organic growth patterns  
-- **Systems Thinking**: Interconnected visualizations showing relationships between blockchain tracks
-- **Inclusive Design**: Accessibility and performance as core principles
-- **Sensory Integration**: Visual, audio, and haptic feedback working in harmony
+- **Glass Morphism**: Contemporary frosted glass aesthetic
+- **Smooth Animations**: Fluid, natural motion design
+- **Performance First**: Optimized for smooth 60fps experience
+- **Clean Typography**: Modern, readable text hierarchy
+- **Ethereum Integration**: Subtle blockchain-inspired visual elements
 
 ## 📂 Project Structure
 
@@ -129,12 +93,21 @@ OmniHarmonic for ETHBoulder embodies digital ecological harmony through:
 omniharmonic/
 ├── src/
 │   ├── scenes/          # Three.js scene implementations
-│   ├── utils/           # Performance, audio, accessibility managers
-│   ├── styles/          # CSS with sacred geometry system
-│   └── data/            # ETHBoulder tracks and portfolio data
-├── public/              # Static assets
+│   ├── components/      # React-style components
+│   ├── styles/          # CSS with modern design system
+│   └── data/            # ETHBoulder content data
+├── public/              # Static assets including 3D models
 └── dist/                # Production build output
 ```
+
+## 🙏 Acknowledgments
+
+**Boulder's Flatirons Climbing Area** by Shapespeare on Thingiverse: https://www.thingiverse.com/thing:1358558
+
+**Summary:**
+By request, a topo of the Flatirons climbing area outside of Boulder CO. The LIDAR data comes courtesy of Anderson, S.P., Qinghua, G., and Parrish, E.G., 2012, Snow-on and snow-off Lidar point cloud data and digital elevation models for study of topography, snow, ecosystems and environmental change at Boulder Creek Critical Zone Observatory, Colorado: Boulder Creek CZO, INSTAAR, University of Colorado at Boulder, digital media. by way of http://opentopo.sdsc.edu/
+
+We talk about topos like this and a whole lot more on the 3D Printing Today podcast available on iTunes, or Stitcher radio learn more at http://www.threedprintingtoday.com/
 
 ## 🤝 Contributing
 
@@ -151,4 +124,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-*Experience digital harmony at the intersection of blockchain technology, consciousness, and the Boulder ecosystem.*
+*Experience the intersection of blockchain technology and Boulder's natural beauty.*
