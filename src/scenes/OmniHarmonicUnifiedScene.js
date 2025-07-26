@@ -40,21 +40,27 @@ export class OmniHarmonicUnifiedScene {
       }
     }
     
-    // Unified scroll-driven camera system - no conflicts, pure scroll interpolation
+    // Refined scroll-driven camera system - ultra-smooth continuous path
     this.cameraKeyframes = [
-      // Topographical phase (0-35%) - cinematic terrain showcase
+      // Topographical phase (0-35%) - smoother terrain showcase with gentle curves
       { scrollPercent: 0.0, position: [-470, 250, 490], rotation: [-0.258, -1.464, 0.000], fov: 75 },
-      { scrollPercent: 0.1, position: [-260, 210, 510], rotation: [-0.318, -1.476, 0.000], fov: 75 },
-      { scrollPercent: 0.2, position: [-170, 210, 430], rotation: [-0.390, -0.576, 0.000], fov: 78 },
-      { scrollPercent: 0.35, position: [0, 200, 0], rotation: [-1.57, 0, 0], fov: 85 }, // End topographical
+      { scrollPercent: 0.08, position: [-320, 220, 500], rotation: [-0.280, -1.470, 0.000], fov: 75 }, // Gentler approach
+      { scrollPercent: 0.15, position: [-200, 200, 450], rotation: [-0.320, -1.200, 0.000], fov: 76 }, // Smoother left turn
+      { scrollPercent: 0.25, position: [-50, 180, 350], rotation: [-0.450, -0.800, 0.000], fov: 78 }, // Continue smooth arc
+      { scrollPercent: 0.35, position: [50, 160, 200], rotation: [-0.600, -0.400, 0.000], fov: 80 }, // Glide past terrain
       
-      // Indra's Net phase (35-65%) - gradual transition to network view
-      { scrollPercent: 0.5, position: [0, 195, 5], rotation: [-1.55, 0, 0], fov: 80 },
-      { scrollPercent: 0.65, position: [0, 190, 10], rotation: [-1.5, 0, 0], fov: 78 }, // End indras net
+      // Transition to Indra's Net (35-50%) - continue gliding into emptiness 
+      { scrollPercent: 0.42, position: [80, 140, 100], rotation: [-0.800, -0.200, 0.000], fov: 82 }, // Continue past terrain
+      { scrollPercent: 0.50, position: [100, 120, 20], rotation: [-1.000, 0.000, 0.000], fov: 84 }, // Into empty space
       
-      // Flower of Life phase (65-100%) - zoom out for meditation
-      { scrollPercent: 0.8, position: [0, 150, 100], rotation: [-0.3, 0, 0], fov: 60 },
-      { scrollPercent: 1.0, position: [0, 120, 200], rotation: [0, 0, 0], fov: 45 }
+      // Indra's Net phase (50-65%) - positioned above the network
+      { scrollPercent: 0.58, position: [50, 100, 0], rotation: [-1.200, 0.000, 0.000], fov: 82 }, // Looking down at network
+      { scrollPercent: 0.65, position: [0, 80, 0], rotation: [-1.400, 0.000, 0.000], fov: 80 }, // Centered above network
+      
+      // Flower of Life phase (65-100%) - pull back for meditation view
+      { scrollPercent: 0.75, position: [0, 100, 50], rotation: [-1.200, 0.000, 0.000], fov: 70 }, // Start pulling back
+      { scrollPercent: 0.85, position: [0, 120, 120], rotation: [-0.600, 0.000, 0.000], fov: 60 }, // Continue back
+      { scrollPercent: 1.0, position: [0, 140, 200], rotation: [-0.200, 0.000, 0.000], fov: 45 } // Final meditation view
     ]
     
     this.cameraInitialized = false

@@ -231,8 +231,12 @@ body {
 .logo-container {
   position: absolute;
   top: -80px;
-  left: -100px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: var(--z-content);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sigil-logo {

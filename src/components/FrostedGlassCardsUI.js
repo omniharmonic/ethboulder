@@ -107,23 +107,22 @@ export class FrostedGlassCardsUI {
     const cardWrapper = document.createElement('div')
     cardWrapper.className = 'card-wrapper'
     
-    // Distribute 9 cards starting further down, evenly spaced to avoid section headers
+    // Clean, evenly distributed card layout with better spacing
     const positions = [
-      // Start further down after the hero section, and space evenly throughout scroll
-      // Systems section (cards 0-2) - positioned after systems header
-      { top: '80vh', left: '45vw', maxWidth: '400px' },      // Systems card 1 - after header
-      { top: '120vh', left: '55vw', maxWidth: '400px' },     // Systems card 2 - evenly spaced
-      { top: '160vh', left: '40vw', maxWidth: '400px' },     // Systems card 3 - continue spacing
+      // Systems section (cards 0-2) - well spaced after hero section
+      { top: '90vh', left: '40vw', maxWidth: '380px' },      // Systems card 1 - clear of header
+      { top: '130vh', left: '58vw', maxWidth: '380px' },     // Systems card 2 - alternate side
+      { top: '170vh', left: '35vw', maxWidth: '380px' },     // Systems card 3 - varied positioning
       
-      // Culture section (cards 3-5) - positioned after culture header  
-      { top: '220vh', left: '50vw', maxWidth: '400px' },     // Culture card 1 - after header
-      { top: '260vh', left: '42vw', maxWidth: '400px' },     // Culture card 2 - evenly spaced
-      { top: '300vh', left: '58vw', maxWidth: '400px' },     // Culture card 3 - continue spacing
+      // Culture section (cards 3-5) - clean transition area
+      { top: '230vh', left: '52vw', maxWidth: '380px' },     // Culture card 1 - clear spacing
+      { top: '270vh', left: '38vw', maxWidth: '380px' },     // Culture card 2 - left side
+      { top: '310vh', left: '60vw', maxWidth: '380px' },     // Culture card 3 - right side
       
-      // Story section (cards 6-8) - positioned after story header
-      { top: '360vh', left: '47vw', maxWidth: '400px' },     // Story card 1 - after header
-      { top: '400vh', left: '53vw', maxWidth: '400px' },     // Story card 2 - evenly spaced
-      { top: '440vh', left: '45vw', maxWidth: '400px' }      // Story card 3 - final spacing
+      // Story section (cards 6-8) - final section with generous spacing
+      { top: '370vh', left: '45vw', maxWidth: '380px' },     // Story card 1 - centered approach
+      { top: '410vh', left: '55vw', maxWidth: '380px' },     // Story card 2 - slight right
+      { top: '450vh', left: '42vw', maxWidth: '380px' }      // Story card 3 - final position
     ]
     
     const position = positions[index] || positions[0]
