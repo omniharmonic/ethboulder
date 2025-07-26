@@ -21,46 +21,48 @@ export class OmniHarmonicUnifiedScene {
     this.transitionProgress = 0
     this.scrollDirection = 1 // 1 for down, -1 for up
     
-    // Enhanced phase configuration with ultra-smooth cinematic transitions
+    // Ultra-smooth phase configuration with much earlier terrain fade-out
     this.phases = {
       topographical: {
-        range: [0, 0.35], // Slightly longer for better pacing
+        range: [0, 0.18], // Much shorter terrain phase - fade out much sooner for better Indra's Net visibility
         camera: { position: [0, 200, 0], target: [0, 0, 0], fov: 85 }, // High top-down view
         lighting: { ambient: 0.6, directional: 1.5, position: [0, 150, 0] } // Sun directly overhead
       },
       indrasNet: {
-        range: [0.35, 0.65], // Centered range for balanced flow
+        range: [0.18, 0.70], // Much longer Indra's Net phase for maximum visibility and impact
         camera: { position: [0, 195, 5], target: [0, 0, 0], fov: 80 }, // Much more gradual transition - stay closer to top-down
         lighting: { ambient: 0.4, directional: 0.8, position: [0, 130, 5] }
       },
       flowerOfLife: {
-        range: [0.65, 1.0], // Longer final phase for meditation
+        range: [0.70, 1.0], // Longer final phase with smooth transitions
         camera: { position: [0, 120, 200], target: [0, 0, 0], fov: 45 }, // Much further away for stable view
         lighting: { ambient: 0.6, directional: 0.8, position: [0, 80, 0] } // Light from above for top-down
       }
     }
     
-    // Refined scroll-driven camera system - ultra-smooth continuous path
+    // Ultra-smooth camera system with continuous flow - adjusted for earlier terrain fade
     this.cameraKeyframes = [
-      // Topographical phase (0-35%) - smoother terrain showcase with gentle curves
+      // Topographical phase (0-18%) - shortened terrain showcase with smoother arc
       { scrollPercent: 0.0, position: [-470, 250, 490], rotation: [-0.258, -1.464, 0.000], fov: 75 },
-      { scrollPercent: 0.08, position: [-320, 220, 500], rotation: [-0.280, -1.470, 0.000], fov: 75 }, // Gentler approach
-      { scrollPercent: 0.15, position: [-200, 200, 450], rotation: [-0.320, -1.200, 0.000], fov: 76 }, // Smoother left turn
-      { scrollPercent: 0.25, position: [-50, 180, 350], rotation: [-0.450, -0.800, 0.000], fov: 78 }, // Continue smooth arc
-      { scrollPercent: 0.35, position: [50, 160, 200], rotation: [-0.600, -0.400, 0.000], fov: 80 }, // Glide past terrain
+      { scrollPercent: 0.06, position: [-320, 220, 500], rotation: [-0.280, -1.470, 0.000], fov: 75 }, // Faster approach
+      { scrollPercent: 0.12, position: [-200, 200, 450], rotation: [-0.320, -1.200, 0.000], fov: 76 }, // Smoother left turn
+      { scrollPercent: 0.18, position: [0, 170, 250], rotation: [-0.600, -0.200, 0.000], fov: 80 }, // End terrain much earlier
       
-      // Transition to Indra's Net (35-50%) - continue gliding into emptiness 
-      { scrollPercent: 0.42, position: [80, 140, 100], rotation: [-0.800, -0.200, 0.000], fov: 82 }, // Continue past terrain
-      { scrollPercent: 0.50, position: [100, 120, 20], rotation: [-1.000, 0.000, 0.000], fov: 84 }, // Into empty space
+      // Extended transition to Indra's Net (18-40%) - longer smooth glide for better visibility
+      { scrollPercent: 0.22, position: [0, 150, 150], rotation: [-0.800, 0.000, 0.000], fov: 82 }, // Continue smoothly upward
+      { scrollPercent: 0.30, position: [0, 120, 50], rotation: [-1.100, 0.000, 0.000], fov: 84 }, // Smooth descent to network level
+      { scrollPercent: 0.40, position: [0, 100, 0], rotation: [-1.300, 0.000, 0.000], fov: 82 }, // Arrive at network smoothly
       
-      // Indra's Net phase (50-65%) - positioned above the network
-      { scrollPercent: 0.58, position: [50, 100, 0], rotation: [-1.200, 0.000, 0.000], fov: 82 }, // Looking down at network
-      { scrollPercent: 0.65, position: [0, 80, 0], rotation: [-1.400, 0.000, 0.000], fov: 80 }, // Centered above network
+      // Indra's Net phase (50-70%) - stable contemplation of the network
+      { scrollPercent: 0.58, position: [0, 95, 0], rotation: [-1.400, 0.000, 0.000], fov: 80 }, // Looking down at network
+      { scrollPercent: 0.65, position: [0, 90, 0], rotation: [-1.450, 0.000, 0.000], fov: 78 }, // Centered above network
+      { scrollPercent: 0.70, position: [0, 85, 0], rotation: [-1.400, 0.000, 0.000], fov: 76 }, // Final network view
       
-      // Flower of Life phase (65-100%) - pull back for meditation view
-      { scrollPercent: 0.75, position: [0, 100, 50], rotation: [-1.200, 0.000, 0.000], fov: 70 }, // Start pulling back
-      { scrollPercent: 0.85, position: [0, 120, 120], rotation: [-0.600, 0.000, 0.000], fov: 60 }, // Continue back
-      { scrollPercent: 1.0, position: [0, 140, 200], rotation: [-0.200, 0.000, 0.000], fov: 45 } // Final meditation view
+      // Smooth transition to Flower of Life (70-100%) - continuous cinematic pull-back
+      { scrollPercent: 0.75, position: [0, 100, 20], rotation: [-1.200, 0.000, 0.000], fov: 74 }, // Start pulling back smoothly
+      { scrollPercent: 0.82, position: [0, 120, 60], rotation: [-0.900, 0.000, 0.000], fov: 68 }, // Continue back continuously
+      { scrollPercent: 0.90, position: [0, 140, 120], rotation: [-0.600, 0.000, 0.000], fov: 60 }, // Smooth approach
+      { scrollPercent: 1.0, position: [0, 160, 200], rotation: [-0.300, 0.000, 0.000], fov: 50 } // Final meditation view
     ]
     
     this.cameraInitialized = false
@@ -98,17 +100,8 @@ export class OmniHarmonicUnifiedScene {
     console.log('🌊 Initializing OmniHarmonic Unified Scene System')
     
     try {
-      // Add a simple test cube first to ensure rendering works
-      console.log('🧪 Adding test cube for rendering verification')
-      const testGeometry = new THREE.BoxGeometry(5, 5, 5)
-      const testMaterial = new THREE.MeshBasicMaterial({ 
-        color: 0x00ff00,
-        wireframe: true
-      })
-      const testCube = new THREE.Mesh(testGeometry, testMaterial)
-      testCube.position.set(0, 10, 0)
-      this.scene.add(testCube)
-      console.log('✅ Test cube added')
+      // Test cube removed - rendering verification no longer needed
+      console.log('🧪 Skipping test cube - using clean scene for production')
       
       // Initialize all sub-scenes
       await this.initializeSubScenes()
@@ -134,17 +127,9 @@ export class OmniHarmonicUnifiedScene {
       console.error('❌ Critical error during OmniHarmonic init:', error)
       console.error('❌ Full error stack:', error.stack)
       
-      // Ensure we at least have the test cube for rendering
+      // Emergency cube removed - let proper error handling take over
       if (this.scene.children.length === 0) {
-        console.log('🆘 No objects in scene, adding emergency cube')
-        const emergencyGeometry = new THREE.BoxGeometry(10, 10, 10)
-        const emergencyMaterial = new THREE.MeshBasicMaterial({ 
-          color: 0xff0000,
-          wireframe: true
-        })
-        const emergencyCube = new THREE.Mesh(emergencyGeometry, emergencyMaterial)
-        emergencyCube.position.set(0, 0, 0)
-        this.scene.add(emergencyCube)
+        console.log('🆘 No objects in scene - allowing natural fallback system to handle')
       }
       
       throw error
@@ -795,7 +780,7 @@ export class OmniHarmonicUnifiedScene {
 
   updateSceneVisibility() {
     // Ultra-smooth cross-fade between scenes with extended transitions
-    const fadeMargin = 0.15 // Optimized overlap for seamless flow
+    const fadeMargin = 0.25 // Longer overlap for more gradual terrain fade-out
     
     // Calculate target opacities with enhanced cinematic easing
     let targetOpacities = {
@@ -824,7 +809,7 @@ export class OmniHarmonicUnifiedScene {
     
     // Apply opacity changes with enhanced ultra-smooth blending
     Object.keys(targetOpacities).forEach(sceneName => {
-      const lerpSpeed = 0.015 // Even gentler lerp for ultra-smooth cinematic transitions
+      const lerpSpeed = 0.008 // Much gentler lerp for extremely gradual terrain fade-out
       this.sceneOpacity[sceneName] = THREE.MathUtils.lerp(
         this.sceneOpacity[sceneName],
         targetOpacities[sceneName],
@@ -1161,26 +1146,8 @@ export class OmniHarmonicUnifiedScene {
   // 3D frosted cards removed - now using 2D UI cards
 
   createFallbackSystem() {
-    // Create a simple fallback in case of initialization errors
-    console.log('🔄 Creating fallback visualization system')
-    
-    const geometry = new THREE.BoxGeometry(2, 2, 2)
-    const material = new THREE.MeshBasicMaterial({ 
-      color: 0x0D4F5C,
-      transparent: true,
-      opacity: 0.8
-    })
-    
-    const cube = new THREE.Mesh(geometry, material)
-    this.scene.add(cube)
-    
-    // Animated rotation for visual feedback
-    const animate = () => {
-      cube.rotation.x += 0.01
-      cube.rotation.y += 0.01
-    }
-    
-    setInterval(animate, 16)
+    // Fallback system removed - using proper scene management instead
+    console.log('🔄 Fallback cube system disabled - relying on proper scene initialization')
   }
 
   onEnter() {

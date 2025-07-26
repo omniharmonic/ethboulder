@@ -31,7 +31,7 @@ export class FlowerOfLifeScene {
       },
       animation: {
         rotationSpeed: 0.005,
-        sphereOpacity: 0.6,
+        sphereOpacity: 0.35, // Much more transparent for subtle, meditative feel
         breathingAmplitude: 0.02,
         breathingSpeed: 0.3
       }
@@ -77,7 +77,7 @@ export class FlowerOfLifeScene {
           child.material = new THREE.MeshPhongMaterial({
             color: this.config.colors.primary,
             transparent: true,
-            opacity: 0.8,
+            opacity: 0.4, // More transparent for subtle, ethereal feel
             shininess: 100
           })
           child.castShadow = true
@@ -101,7 +101,7 @@ export class FlowerOfLifeScene {
     const material = new THREE.MeshPhongMaterial({
       color: this.config.colors.primary,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.3, // More transparent wireframe overlay
       wireframe: true
     })
     

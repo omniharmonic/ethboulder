@@ -5,6 +5,7 @@ export class FrostedGlassCardsUI {
     this.cardsContainer = null
     this.cards = []
     this.currentSection = 'systems' // Default section
+    this.resizeTimeout = null
   }
 
   init() {
@@ -22,7 +23,7 @@ export class FrostedGlassCardsUI {
       top: 0;
       left: 0;
       width: 100%;
-      height: 400vh;
+      height: 800vh;
       pointer-events: none;
       z-index: var(--z-content);
       display: flex;
@@ -37,6 +38,9 @@ export class FrostedGlassCardsUI {
     
     // Setup scroll listener for dynamic positioning
     this.setupScrollListener()
+    
+    // Setup resize listener for responsive layout updates
+    this.setupResizeListener()
   }
 
   setupScrollListener() {
@@ -54,6 +58,24 @@ export class FrostedGlassCardsUI {
         ticking = true
       }
     }, { passive: true })
+  }
+
+  setupResizeListener() {
+    // Debounced resize handler for responsive layout updates
+    const handleResize = () => {
+      clearTimeout(this.resizeTimeout)
+      this.resizeTimeout = setTimeout(() => {
+        console.log('📱 Screen size changed - updating card layout responsively')
+        this.renderCards() // Re-render cards with new responsive positioning
+      }, 250) // Debounce resize events
+    }
+
+    window.addEventListener('resize', handleResize)
+    
+    // Also listen for orientation changes on mobile
+    window.addEventListener('orientationchange', () => {
+      setTimeout(handleResize, 100) // Small delay for orientation change to complete
+    })
   }
 
   updateCardsVisibility(scrollProgress) {
@@ -107,25 +129,113 @@ export class FrostedGlassCardsUI {
     const cardWrapper = document.createElement('div')
     cardWrapper.className = 'card-wrapper'
     
-    // Clean, evenly distributed card layout with better spacing
+    // Enhanced responsive detection with viewport considerations
+    const viewportWidth = window.innerWidth
+    const viewportHeight = window.innerHeight
+    const isPortrait = viewportHeight > viewportWidth
+    const isMobile = viewportWidth < 768
+    const isTablet = viewportWidth >= 768 && viewportWidth < 1024
+    const isDesktop = viewportWidth >= 1024
+    const isSmallMobile = viewportWidth < 480 // Extra small screens
+    
+    // Responsive card dimensions with enhanced mobile support
+    let cardWidth
+    if (isSmallMobile) {
+      cardWidth = '90vw' // Wider on very small screens
+    } else if (isMobile) {
+      cardWidth = '85vw'
+    } else if (isTablet) {
+      cardWidth = isPortrait ? '70vw' : '45vw' // Adjust for tablet orientation
+    } else {
+      cardWidth = '320px'
+    }
+    
+    // Calculate safe starting position - ensure cards start MUCH further below header
+    const headerHeight = isMobile ? 100 : 120 // Account for header height in vh
+    const safeStartPosition = Math.max(300, headerHeight + 200) // Much higher minimum - 300vh or header + large buffer
+    
+    // Dynamic spacing with enhanced mobile considerations
+    let cardSpacing, sectionGap
+    if (isSmallMobile) {
+      cardSpacing = 30 // Extra spacing for small screens
+      sectionGap = 80 // Smaller section gaps on small screens to fit more content
+    } else if (isMobile) {
+      cardSpacing = 25
+      sectionGap = 100
+    } else if (isTablet) {
+      cardSpacing = isPortrait ? 35 : 30 // More spacing in portrait mode
+      sectionGap = isPortrait ? 90 : 120
+    } else {
+      cardSpacing = 30
+      sectionGap = 120
+    }
+    
     const positions = [
-      // Systems section (cards 0-2) - well spaced after hero section
-      { top: '90vh', left: '40vw', maxWidth: '380px' },      // Systems card 1 - clear of header
-      { top: '130vh', left: '58vw', maxWidth: '380px' },     // Systems card 2 - alternate side
-      { top: '170vh', left: '35vw', maxWidth: '380px' },     // Systems card 3 - varied positioning
+      // Systems section (cards 0-2) - positioned safely below header
+      { 
+        top: `${safeStartPosition}vh`, 
+        left: isMobile ? '50vw' : '15vw', 
+        maxWidth: cardWidth,
+        transform: isMobile ? 'translateX(-50%)' : 'none'
+      },
+      { 
+        top: `${safeStartPosition + cardSpacing}vh`, 
+        left: isMobile ? '50vw' : '70vw', 
+        maxWidth: cardWidth,
+        transform: isMobile ? 'translateX(-50%)' : 'translateX(-100%)'
+      },
+      { 
+        top: `${safeStartPosition + cardSpacing * 2}vh`, 
+        left: isMobile ? '50vw' : '42vw', 
+        maxWidth: cardWidth,
+        transform: isMobile ? 'translateX(-50%)' : 'translateX(-50%)'
+      },
       
-      // Culture section (cards 3-5) - clean transition area
-      { top: '230vh', left: '52vw', maxWidth: '380px' },     // Culture card 1 - clear spacing
-      { top: '270vh', left: '38vw', maxWidth: '380px' },     // Culture card 2 - left side
-      { top: '310vh', left: '60vw', maxWidth: '380px' },     // Culture card 3 - right side
+      // Culture section (cards 3-5) - positioned with large gap from systems
+      { 
+        top: `${safeStartPosition + sectionGap}vh`, 
+        left: isMobile ? '50vw' : '20vw', 
+        maxWidth: cardWidth,
+        transform: isMobile ? 'translateX(-50%)' : 'none'
+      },
+      { 
+        top: `${safeStartPosition + sectionGap + cardSpacing}vh`, 
+        left: isMobile ? '50vw' : '75vw', 
+        maxWidth: cardWidth,
+        transform: isMobile ? 'translateX(-50%)' : 'translateX(-100%)'
+      },
+      { 
+        top: `${safeStartPosition + sectionGap + cardSpacing * 2}vh`, 
+        left: isMobile ? '50vw' : '47vw', 
+        maxWidth: cardWidth,
+        transform: isMobile ? 'translateX(-50%)' : 'translateX(-50%)'
+      },
       
-      // Story section (cards 6-8) - final section with generous spacing
-      { top: '370vh', left: '45vw', maxWidth: '380px' },     // Story card 1 - centered approach
-      { top: '410vh', left: '55vw', maxWidth: '380px' },     // Story card 2 - slight right
-      { top: '450vh', left: '42vw', maxWidth: '380px' }      // Story card 3 - final position
+      // Story section (cards 6-8) - positioned with large gap from culture
+      { 
+        top: `${safeStartPosition + sectionGap * 2}vh`, 
+        left: isMobile ? '50vw' : '25vw', 
+        maxWidth: cardWidth,
+        transform: isMobile ? 'translateX(-50%)' : 'none'
+      },
+      { 
+        top: `${safeStartPosition + sectionGap * 2 + cardSpacing}vh`, 
+        left: isMobile ? '50vw' : '65vw', 
+        maxWidth: cardWidth,
+        transform: isMobile ? 'translateX(-50%)' : 'translateX(-100%)'
+      },
+      { 
+        top: `${safeStartPosition + sectionGap * 2 + cardSpacing * 2}vh`, 
+        left: isMobile ? '50vw' : '45vw', 
+        maxWidth: cardWidth,
+        transform: isMobile ? 'translateX(-50%)' : 'translateX(-50%)'
+      }
     ]
     
     const position = positions[index] || positions[0]
+    
+    // Debug logging for card positioning
+    console.log(`📍 Card ${index} positioned at: ${position.top}, ${position.left} (safeStart: ${safeStartPosition}vh)`)
     
     cardWrapper.style.cssText = `
       position: absolute;
@@ -136,6 +246,8 @@ export class FrostedGlassCardsUI {
       pointer-events: auto;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       opacity: 0.8;
+      transform: ${position.transform || 'none'};
+      z-index: 10;
     `
     
     const card = this.createCard(project, index)
@@ -372,10 +484,15 @@ export class FrostedGlassCardsUI {
   }
 
   dispose() {
+    // Clean up event listeners
+    clearTimeout(this.resizeTimeout)
+    
+    // Remove the cards container
     if (this.cardsContainer) {
       document.body.removeChild(this.cardsContainer)
     }
+    
     this.cards = []
-    console.log('✨ Frosted Glass Cards UI disposed')
+    console.log('✨ Frosted Glass Cards UI disposed with cleaned event listeners')
   }
 }
