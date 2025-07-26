@@ -1,32 +1,30 @@
-# OmniHarmonic
+# OmniHarmonic - ETHBoulder Experience
 
-An immersive 3D web experience that embodies "digital ecological harmony" through interactive visualizations and sound design.
+An immersive 3D web experience created specifically for ETHBoulder 2024, embodying "digital ecological harmony" through interactive visualizations that showcase the intersection of blockchain technology and consciousness.
 
-## 🌊 Features
+## 🏔️ ETHBoulder Special Features
 
-- **Interactive Topographical Landscape**: 2D to 3D transformation with mouse-responsive sound waves
-- **Systems Network Visualization**: Indra's Net inspired 3D network of interconnected projects  
-- **Cellular Growth Simulation**: Organic particle system showing cultural evolution
-- **Spatial Audio Design**: Context-aware soundscapes and interaction sonification
-- **Accessibility First**: Screen reader support, keyboard navigation, reduced motion options
-- **Performance Adaptive**: Automatic quality adjustment based on device capabilities
-- **Sacred Geometry**: Golden ratio proportions throughout the design system
+- **ETHBoulder Track Visualization**: Interactive 3D network showcasing the 5 main conference tracks
+  - **AI Track**: AI-powered smart contracts and machine learning applications
+  - **ETH Localism Track**: Building local Ethereum communities and ecosystems  
+  - **App Track**: Application development and Web3 UX/UI design
+  - **Abundance Track**: Regenerative finance and prosperity technology
+  - **Protocol Layer Track**: Core Ethereum protocol development and infrastructure
+- **Interactive Topographical Landscape**: 2D to 3D transformation representing the Boulder landscape
+- **Cellular Growth Simulation**: Organic particle system showing the evolution of blockchain communities
+- **Spatial Audio Design**: Context-aware soundscapes for each conference track
+- **Sacred Geometry**: Golden ratio proportions reflecting the harmony of blockchain ecosystems
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Vanilla JavaScript + Three.js for 3D graphics
+- **Frontend**: Vanilla JavaScript + Three.js for immersive 3D graphics
 - **Build**: Vite with ES2020 target and legacy browser support
 - **Animation**: GSAP with ScrollTrigger for scroll-based interactions
 - **Audio**: Tone.js for interactive sound synthesis
 - **Styling**: CSS3 with Custom Properties and sacred geometry proportions
 - **Deployment**: Vercel with optimized caching and security headers
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm or yarn
+## 🚀 Quick Start
 
 ### Development
 
@@ -54,20 +52,20 @@ npm run deploy:vercel
 npm run deploy:preview
 ```
 
-## 🎮 Interaction Guide
+## 🎮 ETHBoulder Interaction Guide
 
-### Homepage - Topographical Landscape
+### Homepage - Boulder Landscape
 - **Mouse Movement**: Creates sound waves and terrain interaction
-- **Scrolling**: Transforms 2D contour map into 3D terrain
+- **Scrolling**: Transforms 2D contour map into 3D terrain representing Boulder's mountains
 - **Audio**: Ambient soundscape with mouse sonification
 
-### Systems Section - Project Network
-- **Node Hover**: Highlights connected projects with visual and audio feedback
-- **Node Click**: Displays detailed project information
+### Systems Section - Conference Tracks Network
+- **Track Hover**: Highlights connected tracks with visual and audio feedback
+- **Track Click**: Displays detailed information about each ETHBoulder track
 - **Navigation**: Use arrow keys for accessibility
 
-### Culture Section - Cellular Evolution
-- **Mouse Movement**: Influences cell movement and division patterns
+### Culture Section - Community Evolution
+- **Mouse Movement**: Influences cell movement and division patterns representing community growth
 - **Click**: Adds environmental stimuli to accelerate growth
 - **Controls**: 
   - `P` or Pause button: Pause/resume simulation
@@ -86,7 +84,7 @@ npm run deploy:preview
 
 The application features a sophisticated audio system that:
 
-- Generates ambient soundscapes specific to each section
+- Generates ambient soundscapes specific to each ETHBoulder track
 - Sonifies user interactions (mouse movement, scrolling, clicks)
 - Respects browser autoplay policies with user-initiated activation
 - Provides audio feedback for accessibility
@@ -115,20 +113,13 @@ Performance monitoring runs continuously and adjusts quality in real-time to mai
 - **Tablet**: Adapted interactions for touch input
 - **Mobile**: Simplified interface with optimized performance
 
-## 🔒 Security & Privacy
-
-- Implements comprehensive security headers
-- No tracking or analytics by default
-- Privacy-first design approach
-- Secure content delivery with CSP headers
-
 ## 🎨 Design Philosophy
 
-OmniHarmonic embodies digital ecological harmony through:
+OmniHarmonic for ETHBoulder embodies digital ecological harmony through:
 
 - **Sacred Geometry**: Golden ratio proportions in layout and animations
 - **Organic Interactions**: Natural, breathing animations and organic growth patterns  
-- **Systems Thinking**: Interconnected visualizations showing relationships
+- **Systems Thinking**: Interconnected visualizations showing relationships between blockchain tracks
 - **Inclusive Design**: Accessibility and performance as core principles
 - **Sensory Integration**: Visual, audio, and haptic feedback working in harmony
 
@@ -140,15 +131,14 @@ omniharmonic/
 │   ├── scenes/          # Three.js scene implementations
 │   ├── utils/           # Performance, audio, accessibility managers
 │   ├── styles/          # CSS with sacred geometry system
-│   └── data/            # Portfolio and content data
+│   └── data/            # ETHBoulder tracks and portfolio data
 ├── public/              # Static assets
-├── docs/                # Project documentation
 └── dist/                # Production build output
 ```
 
 ## 🤝 Contributing
 
-This is a portfolio project, but feedback and suggestions are welcome! Please feel free to:
+This is a special ETHBoulder experience, but feedback and suggestions are welcome! Please feel free to:
 
 - Report accessibility issues
 - Suggest performance improvements  
@@ -161,4 +151,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-*Experience digital harmony at the intersection of art, technology, and consciousness.*
+*Experience digital harmony at the intersection of blockchain technology, consciousness, and the Boulder ecosystem.*
