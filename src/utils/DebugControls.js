@@ -30,9 +30,9 @@ export class DebugControls {
     console.log('  - QE: Move camera up/down')
     console.log('  - Arrow keys: Rotate camera look direction')
     console.log('  - Mouse drag: Rotate camera (when debug active)')
-    console.log('  - IJKL: Rotate terrain (fine control)')
+    console.log('  - TFGH: Rotate terrain (fine control)')
     console.log('  - P: Print current positions')
-    console.log('  - Mountain repositioning: Use IJKL for precise terrain rotation')
+    console.log('  - Mountain repositioning: Use TFGH for precise terrain rotation')
   }
   
   setupEventListeners() {
@@ -135,21 +135,21 @@ export class DebugControls {
       this.camera.rotation.y -= rotSpeed
     }
     
-    // Terrain rotation (IJKL)
+    // Terrain rotation (TFGH keys to avoid conflict with logo controls)
     if (this.terrain) {
-      if (this.keys['KeyI']) {
+      if (this.keys['KeyT']) {
         this.terrain.rotation.x += terrainRotSpeed
         if (this.wireframe) this.wireframe.rotation.x += terrainRotSpeed
       }
-      if (this.keys['KeyK']) {
+      if (this.keys['KeyG']) {
         this.terrain.rotation.x -= terrainRotSpeed
         if (this.wireframe) this.wireframe.rotation.x -= terrainRotSpeed
       }
-      if (this.keys['KeyJ']) {
+      if (this.keys['KeyF']) {
         this.terrain.rotation.y += terrainRotSpeed
         if (this.wireframe) this.wireframe.rotation.y += terrainRotSpeed
       }
-      if (this.keys['KeyL']) {
+      if (this.keys['KeyH']) {
         this.terrain.rotation.y -= terrainRotSpeed
         if (this.wireframe) this.wireframe.rotation.y -= terrainRotSpeed
       }
@@ -206,6 +206,18 @@ export class DebugControls {
       document.body.removeChild(this.debugIndicator)
       this.debugIndicator = null
     }
+  }
+  
+  enable() {
+    this.isActive = true
+    this.addDebugIndicator()
+    console.log('🎮 Debug controls ENABLED')
+  }
+  
+  disable() {
+    this.isActive = false
+    this.removeDebugIndicator()
+    console.log('🎮 Debug controls DISABLED')
   }
   
   dispose() {

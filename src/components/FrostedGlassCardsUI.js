@@ -1,4 +1,4 @@
-import { portfolioData } from '../data/portfolio.js'
+import { ethBoulderTracks } from '../data/ethBoulderTracks.js'
 
 export class FrostedGlassCardsUI {
   constructor() {
@@ -18,21 +18,9 @@ export class FrostedGlassCardsUI {
     // Create the main cards container positioned along the scroll
     this.cardsContainer = document.createElement('div')
     this.cardsContainer.className = 'frosted-cards-overlay'
-    this.cardsContainer.style.cssText = `
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 800vh;
-      pointer-events: none;
-      z-index: var(--z-content);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      padding: 20vh 5vw;
-      box-sizing: border-box;
-      opacity: 1;
-    `
+    
+    // Check if we need vertical layout
+    this.updateContainerLayout()
 
     document.body.appendChild(this.cardsContainer)
     
@@ -41,6 +29,114 @@ export class FrostedGlassCardsUI {
     
     // Setup resize listener for responsive layout updates
     this.setupResizeListener()
+  }
+
+  updateContainerLayout() {
+    const viewportWidth = window.innerWidth
+    const viewportHeight = window.innerHeight
+    const cardMinWidth = 200 // Increased minimum card width for better spacing
+    const cardSpacing = 20 // Minimum spacing between cards
+    const cardsCount = 5
+    const availableWidth = viewportWidth * 0.8 // Reduced to 80% for more padding
+    const totalRequiredWidth = (cardMinWidth * cardsCount) + (cardSpacing * (cardsCount - 1))
+    
+    // Determine layout type - stricter requirements for horizontal layout
+    const canFitAllHorizontal = totalRequiredWidth <= availableWidth
+    const canFit2x3Grid = viewportWidth >= 450 && viewportHeight >= 600 // Increased threshold
+    
+    if (canFitAllHorizontal) {
+      // All cards in horizontal row
+      this.layoutType = 'horizontal'
+      this.cardsContainer.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        pointer-events: none;
+        z-index: var(--z-content);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 20vh 5vw;
+        box-sizing: border-box;
+        opacity: 1;
+      `
+    } else if (canFit2x3Grid) {
+      // 2x3 grid layout - almost full width at bottom of screen
+      this.layoutType = 'grid'
+      
+      // Position at bottom with comfortable width
+      const marginSides = Math.max(60, viewportWidth * 0.1) // Larger margins, 10% of viewport or 60px min
+      const containerWidth = viewportWidth - (marginSides * 2)
+      const containerHeight = Math.min(viewportHeight * 0.35, 300) // Max 35% height or 300px
+      
+      this.cardsContainer.style.cssText = `
+        position: fixed;
+        top: 65vh;
+        left: 50%;
+        transform: translateX(-50%);
+        width: ${containerWidth}px;
+        height: ${containerHeight}px;
+        pointer-events: auto;
+        z-index: var(--z-content);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 25px;
+        box-sizing: border-box;
+        opacity: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        background: rgba(255, 255, 255, 0.008);
+        backdrop-filter: blur(1px);
+        border: 1px solid transparent;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.02),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+          inset 1px 0 0 rgba(255, 255, 255, 0.08),
+          inset -1px 0 0 rgba(255, 255, 255, 0.08);
+        border-radius: 15px;
+      `
+    } else {
+      // Single column vertical layout - almost full width at bottom
+      this.layoutType = 'vertical'
+      
+      // Position at bottom with comfortable width
+      const marginSides = Math.max(60, viewportWidth * 0.1) // Larger margins, 10% of viewport or 60px min
+      const containerWidth = viewportWidth - (marginSides * 2)
+      const containerHeight = Math.min(viewportHeight * 0.35, 300)
+      
+      this.cardsContainer.style.cssText = `
+        position: fixed;
+        top: 65vh;
+        left: 50%;
+        transform: translateX(-50%);
+        width: ${containerWidth}px;
+        height: ${containerHeight}px;
+        pointer-events: auto;
+        z-index: var(--z-content);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 25px;
+        box-sizing: border-box;
+        opacity: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        background: rgba(255, 255, 255, 0.008);
+        backdrop-filter: blur(1px);
+        border: 1px solid transparent;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.02),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+          inset 1px 0 0 rgba(255, 255, 255, 0.08),
+          inset -1px 0 0 rgba(255, 255, 255, 0.08);
+        border-radius: 15px;
+      `
+    }
   }
 
   setupScrollListener() {
@@ -66,6 +162,7 @@ export class FrostedGlassCardsUI {
       clearTimeout(this.resizeTimeout)
       this.resizeTimeout = setTimeout(() => {
         console.log('📱 Screen size changed - updating card layout responsively')
+        this.updateContainerLayout() // Update layout first
         this.renderCards() // Re-render cards with new responsive positioning
       }, 250) // Debounce resize events
     }
@@ -92,11 +189,11 @@ export class FrostedGlassCardsUI {
           (window.innerHeight - cardRect.top) / (window.innerHeight + cardRect.height)
         ))
         
-        // Apply smooth fade and parallax effect
-        card.style.opacity = visibilityRatio * 0.9 + 0.1
+        // Apply smooth fade and parallax effect - keep cards at full opacity
+        card.style.opacity = 1 // Always full opacity
         card.style.transform = `translateY(${(1 - visibilityRatio) * 20}px) scale(${0.95 + visibilityRatio * 0.05})`
       } else {
-        card.style.opacity = 0.1
+        card.style.opacity = 1 // Always full opacity even when out of view
       }
     })
   }
@@ -106,12 +203,8 @@ export class FrostedGlassCardsUI {
     this.cardsContainer.innerHTML = ''
     this.cards = []
 
-    // Get 3 cards from each section for comprehensive display
-    const allCardsToShow = [
-      ...portfolioData.systems.slice(0, 3),   // First 3 systems cards
-      ...portfolioData.culture.slice(0, 3),   // First 3 culture cards  
-      ...portfolioData.story.slice(0, 3)      // First 3 story cards
-    ]
+    // Show all 5 ethBoulder conference tracks
+    const allCardsToShow = ethBoulderTracks
 
     allCardsToShow.forEach((project, index) => {
       const card = this.createStaggeredCard(project, index)
@@ -122,133 +215,117 @@ export class FrostedGlassCardsUI {
     // Initial visibility update
     setTimeout(() => this.updateCardsVisibility(0), 100)
     
-    console.log(`✨ Rendered ${allCardsToShow.length} cards across all sections (3 per section)`)
+    console.log(`✨ Rendered ${allCardsToShow.length} ethBoulder conference track cards`)
+    console.log('🔍 Cards container:', this.cardsContainer)
+    console.log('🔍 Cards array:', this.cards)
   }
 
   createStaggeredCard(project, index) {
     const cardWrapper = document.createElement('div')
     cardWrapper.className = 'card-wrapper'
     
-    // Enhanced responsive detection with viewport considerations
-    const viewportWidth = window.innerWidth
-    const viewportHeight = window.innerHeight
-    const isPortrait = viewportHeight > viewportWidth
-    const isMobile = viewportWidth < 768
-    const isTablet = viewportWidth >= 768 && viewportWidth < 1024
-    const isDesktop = viewportWidth >= 1024
-    const isSmallMobile = viewportWidth < 480 // Extra small screens
+    if (this.layoutType === 'grid') {
+      // Grid layout styling (2 cards per row)
+      cardWrapper.style.cssText = `
+        width: 100%;
+        pointer-events: auto;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      `
+    } else if (this.layoutType === 'vertical') {
+      // Single column vertical layout styling
+      cardWrapper.style.cssText = `
+        width: 100%;
+        pointer-events: auto;
+        transition: all 0.3s ease;
+        margin-bottom: 0;
+        flex-shrink: 0;
+      `
+    } else {
+      // Enhanced responsive detection with viewport considerations
+      const viewportWidth = window.innerWidth
+      const viewportHeight = window.innerHeight
+      const isPortrait = viewportHeight > viewportWidth
+      const isMobile = viewportWidth < 768
+      const isTablet = viewportWidth >= 768 && viewportWidth < 1024
+      const isDesktop = viewportWidth >= 1024
+      const isSmallMobile = viewportWidth < 480 // Extra small screens
     
-    // Responsive card dimensions with enhanced mobile support
+    // Responsive card dimensions - smaller to fit on one line
     let cardWidth
     if (isSmallMobile) {
-      cardWidth = '90vw' // Wider on very small screens
+      cardWidth = '80vw' // Smaller on very small screens
     } else if (isMobile) {
-      cardWidth = '85vw'
+      cardWidth = '70vw'
     } else if (isTablet) {
-      cardWidth = isPortrait ? '70vw' : '45vw' // Adjust for tablet orientation
+      cardWidth = isPortrait ? '50vw' : '30vw' // Much smaller for tablet
     } else {
-      cardWidth = '320px'
+      cardWidth = '240px' // Smaller desktop cards
     }
     
-    // Calculate safe starting position - ensure cards start MUCH further below header
-    const headerHeight = isMobile ? 100 : 120 // Account for header height in vh
-    const safeStartPosition = Math.max(300, headerHeight + 200) // Much higher minimum - 300vh or header + large buffer
+    // Position cards at bottom of opening screen (no scroll needed)
+    const startPosition = isMobile ? 60 : 70 // Start cards at bottom of viewport
     
-    // Dynamic spacing with enhanced mobile considerations
-    let cardSpacing, sectionGap
-    if (isSmallMobile) {
-      cardSpacing = 30 // Extra spacing for small screens
-      sectionGap = 80 // Smaller section gaps on small screens to fit more content
-    } else if (isMobile) {
-      cardSpacing = 25
-      sectionGap = 100
-    } else if (isTablet) {
-      cardSpacing = isPortrait ? 35 : 30 // More spacing in portrait mode
-      sectionGap = isPortrait ? 90 : 120
-    } else {
-      cardSpacing = 30
-      sectionGap = 120
-    }
+    // Compact spacing for cards in single screen view
+    const cardSpacing = isMobile ? 4 : 5 // Small vertical spacing between cards
     
     const positions = [
-      // Systems section (cards 0-2) - positioned safely below header
+      // AI Track
       { 
-        top: `${safeStartPosition}vh`, 
-        left: isMobile ? '50vw' : '15vw', 
+        top: `${startPosition}vh`, 
+        left: '2vw', 
         maxWidth: cardWidth,
-        transform: isMobile ? 'translateX(-50%)' : 'none'
+        transform: 'none'
       },
+      // ETH Localism Track
       { 
-        top: `${safeStartPosition + cardSpacing}vh`, 
-        left: isMobile ? '50vw' : '70vw', 
+        top: `${startPosition}vh`, 
+        left: '21vw', 
         maxWidth: cardWidth,
-        transform: isMobile ? 'translateX(-50%)' : 'translateX(-100%)'
+        transform: 'none'
       },
+      // App Track (center)
       { 
-        top: `${safeStartPosition + cardSpacing * 2}vh`, 
-        left: isMobile ? '50vw' : '42vw', 
+        top: `${startPosition}vh`, 
+        left: '40vw', 
         maxWidth: cardWidth,
-        transform: isMobile ? 'translateX(-50%)' : 'translateX(-50%)'
+        transform: 'none'
       },
-      
-      // Culture section (cards 3-5) - positioned with large gap from systems
+      // Abundance Track
       { 
-        top: `${safeStartPosition + sectionGap}vh`, 
-        left: isMobile ? '50vw' : '20vw', 
+        top: `${startPosition}vh`, 
+        left: '59vw', 
         maxWidth: cardWidth,
-        transform: isMobile ? 'translateX(-50%)' : 'none'
+        transform: 'none'
       },
+      // Protocol Layer Track
       { 
-        top: `${safeStartPosition + sectionGap + cardSpacing}vh`, 
-        left: isMobile ? '50vw' : '75vw', 
+        top: `${startPosition}vh`, 
+        left: '78vw', 
         maxWidth: cardWidth,
-        transform: isMobile ? 'translateX(-50%)' : 'translateX(-100%)'
-      },
-      { 
-        top: `${safeStartPosition + sectionGap + cardSpacing * 2}vh`, 
-        left: isMobile ? '50vw' : '47vw', 
-        maxWidth: cardWidth,
-        transform: isMobile ? 'translateX(-50%)' : 'translateX(-50%)'
-      },
-      
-      // Story section (cards 6-8) - positioned with large gap from culture
-      { 
-        top: `${safeStartPosition + sectionGap * 2}vh`, 
-        left: isMobile ? '50vw' : '25vw', 
-        maxWidth: cardWidth,
-        transform: isMobile ? 'translateX(-50%)' : 'none'
-      },
-      { 
-        top: `${safeStartPosition + sectionGap * 2 + cardSpacing}vh`, 
-        left: isMobile ? '50vw' : '65vw', 
-        maxWidth: cardWidth,
-        transform: isMobile ? 'translateX(-50%)' : 'translateX(-100%)'
-      },
-      { 
-        top: `${safeStartPosition + sectionGap * 2 + cardSpacing * 2}vh`, 
-        left: isMobile ? '50vw' : '45vw', 
-        maxWidth: cardWidth,
-        transform: isMobile ? 'translateX(-50%)' : 'translateX(-50%)'
+        transform: 'none'
       }
     ]
     
-    const position = positions[index] || positions[0]
-    
-    // Debug logging for card positioning
-    console.log(`📍 Card ${index} positioned at: ${position.top}, ${position.left} (safeStart: ${safeStartPosition}vh)`)
-    
-    cardWrapper.style.cssText = `
-      position: absolute;
-      top: ${position.top};
-      left: ${position.left};
-      max-width: ${position.maxWidth};
-      width: 100%;
-      pointer-events: auto;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      opacity: 0.8;
-      transform: ${position.transform || 'none'};
-      z-index: 10;
-    `
+      const position = positions[index] || positions[0]
+      
+      // Debug logging for card positioning
+      console.log(`📍 Card ${index} positioned at: ${position.top}, ${position.left} (startPos: ${startPosition}vh)`)
+      
+      cardWrapper.style.cssText = `
+        position: absolute;
+        top: ${position.top};
+        left: ${position.left};
+        max-width: ${position.maxWidth};
+        width: 100%;
+        pointer-events: auto;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 1 !important;
+        transform: ${position.transform || 'none'};
+        z-index: 10;
+      `
+    } // Close else block
     
     const card = this.createCard(project, index)
     cardWrapper.appendChild(card)
@@ -273,29 +350,24 @@ export class FrostedGlassCardsUI {
               .replace(/\b\w/g, l => l.toUpperCase())
   }
 
-  createCard(project, index) {
+  createCard(track, index) {
     const card = document.createElement('div')
     card.className = 'frosted-glass-card'
     card.style.opacity = '1'
     card.style.transform = 'translateY(0px)'
+    // Remove side lines as requested
 
-    // Create card content with improved spacing and layout
+    // Create card content for ethBoulder track
     card.innerHTML = `
       <div class="card-header">
-        <h3>${project.title}</h3>
-        <span class="year">${project.year || 'Recent'}</span>
+        <div class="track-icon">${track.icon}</div>
+        <h3>${track.title}</h3>
       </div>
       <div class="card-body">
-        <p class="description">${project.description}</p>
-        <div class="meta-info">
-          <span class="status status-${project.status}">${this.formatStatus(project.status)}</span>
-          ${project.impact ? `<span class="impact">Impact: ${Math.round(project.impact * 100)}%</span>` : ''}
-        </div>
-      </div>
-      <div class="card-footer">
-        <div class="tags">
-          ${project.tags.slice(0, 3).map(tag => 
-            `<span class="tag">${this.formatTag(tag)}</span>`
+        <p class="description">${track.description}</p>
+        <div class="topics-list">
+          ${track.topics.map(topic => 
+            `<span class="topic-tag" style="background-color: ${track.color}20; color: ${track.color}">${topic}</span>`
           ).join('')}
         </div>
       </div>
@@ -303,7 +375,7 @@ export class FrostedGlassCardsUI {
 
     // Add click interaction
     card.addEventListener('click', () => {
-      this.onCardClick(project)
+      this.onCardClick(track)
     })
 
     // Add hover effects

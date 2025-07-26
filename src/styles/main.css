@@ -109,7 +109,7 @@ body {
   line-height: var(--golden-ratio);
   color: var(--color-text);
   background: transparent; /* Allow 3D canvas to show through */
-  overflow-x: hidden;
+  overflow-x: visible;
   min-height: 100vh;
 }
 
@@ -199,6 +199,7 @@ body {
 #main-content {
   position: relative;
   z-index: var(--z-content);
+  overflow: visible;
 }
 
 .section {
@@ -208,6 +209,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
+}
+
+#topographical {
+  overflow: visible;
 }
 
 .content-overlay {
@@ -221,23 +227,18 @@ body {
 /* Position header at top but allow natural scrolling away */
 #topographical .content-overlay {
   position: absolute;
-  top: 8vh;
+  top: 20vh;
   left: 50%;
   transform: translateX(-50%);
   z-index: var(--z-content);
+  overflow: visible;
 }
 
-/* Rotating Sigil Logo */
+/* Hide old logo container */
 .logo-container {
-  position: absolute;
-  top: -50px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: var(--z-content);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: none;
 }
+
 
 .sigil-logo {
   width: 60px;
@@ -294,11 +295,12 @@ h1, h2, h3, h4, h5, h6 {
 .hero-title {
   font-size: var(--font-size-xxl);
   font-weight: 700;
-  background: linear-gradient(135deg, var(--color-accent), var(--color-primary));
+  background: linear-gradient(135deg, #4DCCCC, #CC99CC);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: var(--spacing-sm);
+  text-shadow: 0 0 10px rgba(77, 204, 204, 0.3);
   animation: breathe var(--duration-breathing) ease-in-out infinite;
 }
 
@@ -334,13 +336,53 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-/* Remove frosted glass card from omniharmonic header */
+/* Remove frosted glass card from ethBoulder header */
 #topographical .content-overlay {
   background: none;
   backdrop-filter: none;
   border: none;
   border-radius: 0;
   box-shadow: none;
+  padding: var(--spacing-sm);
+  max-width: 600px;
+}
+
+/* ethBoulder Track Cards - Subtle Cyberpunk Theme */
+.track-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 5px rgba(77, 204, 204, 0.3);
+}
+
+.topics-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.topic-tag {
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid currentColor;
+  box-shadow: 0 0 3px rgba(77, 204, 204, 0.2);
+}
+
+/* Subtle glow effects for cards */
+.frosted-glass-card {
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(77, 204, 204, 0.1),
+    inset 0 0 20px rgba(77, 204, 204, 0.05) !important;
+}
+
+.frosted-glass-card:hover {
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(77, 204, 204, 0.2),
+    inset 0 0 30px rgba(77, 204, 204, 0.1) !important;
 }
 
 .phase-section h2 {
@@ -1143,12 +1185,12 @@ h1, h2, h3, h4, h5, h6 {
 /* Improved Frosted Glass Cards with Better Readability */
 .frosted-glass-card {
   position: relative;
-  background: rgba(11, 20, 38, 0.85) !important; /* More opaque background for better readability */
-  border: 1px solid rgba(13, 79, 92, 0.6);
+  background: rgba(11, 20, 38, 0.35) !important; /* Even more transparent background */
+  border: 1px solid rgba(13, 79, 92, 0.8);
   border-radius: 12px;
   padding: var(--spacing-md);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   
   /* Enhanced shadow for depth */
   box-shadow: 
@@ -1166,7 +1208,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .frosted-glass-card:hover {
-  background: rgba(11, 20, 38, 0.9) !important; /* Even more opaque on hover */
+  background: rgba(11, 20, 38, 0.5) !important; /* More opaque on hover but still transparent */
   transform: translateY(-4px) translateZ(0);
   box-shadow: 
     0 12px 40px rgba(0, 0, 0, 0.4),
@@ -1179,13 +1221,19 @@ h1, h2, h3, h4, h5, h6 {
 .frosted-glass-card .status,
 .frosted-glass-card .impact,
 .frosted-glass-card .year,
-.frosted-glass-card .tag {
-  color: rgba(255, 255, 255, 1) !important; /* Completely opaque text */
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for better contrast */
+.frosted-glass-card .tag,
+.frosted-glass-card .topic-tag {
+  color: #FFFFFF !important; /* Pure white for maximum contrast */
+  opacity: 1 !important; /* Force full opacity */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, 0.8) !important; /* Strong shadows for pop */
+  font-weight: 700 !important; /* Very bold for readability */
 }
 
 .frosted-glass-card .description {
-  color: rgba(255, 255, 255, 0.95) !important; /* Slightly less for hierarchy but still very readable */
+  color: #FFFFFF !important; /* Pure white for description too */
+  opacity: 1 !important; /* Force full opacity */
+  font-weight: 600 !important; /* Bold for hierarchy */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, 0.8) !important;
 }
 
 /* Card Grid Layout */

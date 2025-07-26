@@ -86,9 +86,9 @@ export class App {
       await this.sceneManager.init()
       console.log('✅ Scene manager initialized')
       
-      // Initialize scroll controller
-      this.scrollController = new ScrollController(this.sceneManager)
-      console.log('✅ Scroll controller initialized')
+      // Scroll controller disabled for ethBoulder - using cinematic camera loop instead
+      // this.scrollController = new ScrollController(this.sceneManager)
+      console.log('✅ Scroll controller disabled for ethBoulder static experience')
       
       // Initialize frosted glass cards UI
       this.frostedCardsUI = new FrostedGlassCardsUI()

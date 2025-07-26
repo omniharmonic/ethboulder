@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { OmniHarmonicUnifiedScene } from './OmniHarmonicUnifiedScene.js'
+import { EthBoulderScene } from './EthBoulderScene.js'
 import { SimpleFallbackScene } from './SimpleFallbackScene.js'
 
 export class SceneManager {
@@ -88,7 +88,7 @@ export class SceneManager {
       75, // FOV
       window.innerWidth / window.innerHeight, // Aspect ratio
       0.1, // Near
-      1000 // Far
+      10000 // Far - increased for large scene visibility
     )
     
     // Default camera position - closer to see the cubes better
@@ -147,10 +147,10 @@ export class SceneManager {
       console.log('🌊 Creating OmniHarmonic Unified Scene...')
       
       try {
-        const omniHarmonicScene = new OmniHarmonicUnifiedScene(this)
-        await omniHarmonicScene.init()
-        this.scenes.set('unified', omniHarmonicScene)
-        console.log('✅ OmniHarmonic Unified Scene created successfully')
+        const ethBoulderScene = new EthBoulderScene(this)
+        await ethBoulderScene.init()
+        this.scenes.set('unified', ethBoulderScene)
+        console.log('✅ ethBoulder Scene created successfully')
         
       } catch (fullSceneError) {
         console.warn('⚠️ OmniHarmonic scene failed, falling back to simple scene:', fullSceneError)
