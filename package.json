@@ -1,0 +1,36 @@
+{
+  "name": "omniharmonic-website",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --config vite.config.prod.js",
+    "build:dev": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write .",
+    "deploy:vercel": "npm run build && npx vercel deploy --prod",
+    "deploy:preview": "npm run build && npx vercel deploy"
+  },
+  "dependencies": {
+    "three": "^0.155.0",
+    "gsap": "^3.12.2",
+    "tone": "^14.7.77"
+  },
+  "devDependencies": {
+    "vite": "^4.4.5",
+    "vite-plugin-glsl": "^1.1.2",
+    "@vitejs/plugin-legacy": "^4.1.1",
+    "eslint": "^8.45.0",
+    "prettier": "^3.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "vitest": "^0.34.0",
+    "@playwright/test": "^1.37.0",
+    "postcss": "^8.4.27",
+    "autoprefixer": "^10.4.14"
+  }
+}

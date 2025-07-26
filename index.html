@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="omniharmonic - activate and harmonize through immersive 3D experiences" />
+    <title>omniharmonic</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Loading screen -->
+      <div id="loading-screen" class="loading-screen">
+        <div class="loading-animation breathing">
+          <div class="sound-wave crystallize"></div>
+        </div>
+        <p>harmonizing...</p>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Main navigation -->
+      <nav id="main-nav" class="main-navigation" role="navigation">
+        <a href="#topographical" data-nav="topographical">Systems</a>
+        <a href="#mountain" data-nav="mountain">Culture</a>
+        <a href="#indras-net" data-nav="indras-net">Story</a>
+        <a href="#cell-division" data-nav="cell-division">Flower of Life</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+
+      <!-- Three.js Canvas Container -->
+      <div id="canvas-container" class="canvas-container"></div>
+
+      <!-- Content Sections -->
+      <main id="main-content">
+        <!-- Topographical Phase -->
+        <section id="topographical" class="section phase-section" role="application" aria-label="Interactive 2D topographical map with soundwave undulations">
+          <div class="content-overlay">
+            <div class="logo-container">
+              <div class="sigil-logo" id="sigil-logo"></div>
+            </div>
+            <h1 class="hero-title">omniharmonic</h1>
+            <p class="hero-subtitle">activate and harmonize</p>
+          </div>
+        </section>
+
+        <!-- Systems Phase -->
+        <section id="mountain" class="section phase-section" role="application" aria-label="Systems thinking and complex adaptive networks">
+          <div class="content-overlay">
+            <h2>Systems</h2>
+            <p class="phase-description">Exploring complex adaptive systems, resilient networks, and biomimetic architectures that harmonize human and ecological intelligence</p>
+          </div>
+        </section>
+
+        <!-- Culture Phase -->
+        <section id="indras-net" class="section phase-section" role="application" aria-label="Cultural practices and community engagement">
+          <div class="content-overlay">
+            <h2>Culture</h2>
+            <p class="phase-description">Regenerative cultural practices, community storytelling, and ritual design that supports both human and ecological wellbeing</p>
+            <div id="project-details" class="project-details-panel"></div>
+          </div>
+        </section>
+
+        <!-- Story Phase -->
+        <section id="cell-division" class="section phase-section" role="application" aria-label="Speculative fiction and future narratives">
+          <div class="content-overlay golden-section">
+            <h2>Story</h2>
+            <p class="phase-description">Speculative narratives exploring the intersection of human consciousness, ecological intelligence, and emergent futures</p>
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+          <div class="content-overlay vesica-piscis">
+            <div class="crystal-card">
+              <h2>Collaborate</h2>
+              <p>Let's create something extraordinary together</p>
+              <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="project">Project Vision</label>
+                  <textarea id="project" name="project" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn holographic-button">Begin Collaboration</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Environmental Controls for Cellular Phase -->
+      <div class="environmental-controls" style="display: none;" id="env-controls">
+        <h3>Environmental Factors</h3>
+        <div class="env-control">
+          <label for="temperature-slider">Temperature</label>
+          <input type="range" id="temperature-slider" min="0.1" max="2.0" step="0.1" value="1.0">
+        </div>
+        <div class="env-control">
+          <label for="nutrient-slider">Nutrients</label>
+          <input type="range" id="nutrient-slider" min="0.1" max="2.0" step="0.1" value="1.0">
+        </div>
+        <div class="env-control">
+          <label for="oxygen-slider">Oxygen Level</label>
+          <input type="range" id="oxygen-slider" min="0.1" max="2.0" step="0.1" value="1.0">
+        </div>
+      </div>
+
+      <!-- Screen Reader Live Region -->
+      <div id="live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+      <!-- Alternative Text Navigation -->
+      <nav class="text-navigation" style="display: none;">
+        <h2>Site Navigation</h2>
+        <ul>
+          <li><a href="#homepage">Home - Interactive Landscape</a></li>
+          <li><a href="#systems-section">Systems Work - Project Network</a></li>
+          <li><a href="#culture-section">Cultural Work - Living Processes</a></li>
+          <li><a href="#contact">Contact & Collaboration</a></li>
+        </ul>
+      </nav>
+    </div>
+    
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
